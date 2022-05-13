@@ -1,0 +1,41 @@
+{
+  "name": "esbuild",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "## Commands * `npm run dev` - start * `npm run build` - build project with optimizations",
+  "main": "esbuild.config.js",
+  "scripts": {
+    "build": "node esbuild.config.js",
+    "dev": "cross-env ESBUILD_DEV=true node esbuild.config.js"
+  },
+  "author": "Ryze Digital",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.17.10",
+    "@babel/preset-env": "^7.17.10",
+    "autoprefixer": "^10.4.5",
+    "browser-sync": "^2.27.9",
+    "core-js": "^3.22.5",
+    "cross-env": "^7.0.3",
+    "esbuild": "^0.14.38",
+    "esbuild-copy-static-files": "^0.1.0",
+    "esbuild-plugin-babel": "^0.2.3",
+    "esbuild-plugin-eslinter": "^0.1.2",
+    "esbuild-sass-plugin": "^2.2.6",
+    "eslint": "^8.15.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "fs-extra": "^10.1.0",
+    "imagemin": "^8.0.1",
+    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-pngquant": "^9.0.2",
+    "imagemin-svgo": "^10.0.1",
+    "imagemin-webp": "^7.0.0",
+    "postcss": "^8.4.12",
+    "svg-sprite": "^1.5.4",
+    "twig": "^1.15.4"
+  },
+  "dependencies": {
+    "bootstrap": "^5.1.3"
+  }
+}
