@@ -25,7 +25,7 @@ const esbuildServe = async (options = {}, bsOptions = {}) => {
   if (bs) {
     initBuild();
     bs.init(config);
-    bs.watch(`${paths.src}/**/*.*`).on('change', () => initBuild());
+    bs.watch(`${paths.src}/**/*.*`).on('change', initBuild);
   }
 
 };
