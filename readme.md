@@ -20,7 +20,8 @@ esbuild-starter/
 │       ├── js/
 │       ├── css/
 │       ├── parts/
-│       └── twig-vars.json    
+│       ├── twig-vars.json    
+│       └── index.twig    
 │     
 ├── package.json
 ├── esbuild.config.js
