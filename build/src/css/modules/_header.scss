@@ -1,0 +1,134 @@
+.page-header {
+  @extend .bg-white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  transition: 0.3s $ease-out-cubic;
+  z-index: $zindex-fixed;
+  @include media-breakpoint-up(xl) {
+    position: sticky;
+  }
+  &-brand {
+    width: 100px;
+    transition: 0.3s $ease-out-cubic;
+    @include media-breakpoint-up(md) {
+      width: 170px;
+      .is-scroll & {
+        width: 85px;
+      }
+    }
+  }
+  &__title {
+    overflow: hidden;
+    margin-top: $spacer;
+    color: #ea8c00;
+    letter-spacing: 0.08em;
+    @include fluid($vw-576, $vw-1920, $h6-font-size, $font-size-base * 1.4, $priority: true);
+    transition: 0.3s 0s $ease-out-cubic;
+    .is-scroll & {
+      margin-top: -$spacer * 4;
+    }
+  }
+  &__nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    background: $white;
+    transition: 0.3s $ease-in-cubic;
+    .is-open & {
+      opacity: 1;
+      visibility: visible;
+    }
+    @include media-breakpoint-up(xl) {
+      position: static;
+      width: auto;
+      opacity: 1;
+      visibility: visible;
+    }
+    li {
+      // @include media-breakpoint-up(xxl) {
+      //   width: 250px;
+      // }
+      a {
+        width: 100%;
+        font-size: rem-calc(16px);
+        padding: $nav-link-padding-y $nav-link-padding-x * 1.5;
+        letter-spacing: 0.08em;
+        @include media-breakpoint-up(lg) {
+          padding: $nav-link-padding-y $nav-link-padding-x;
+        }
+        &:hover {
+          color: $white;
+          background: $primary;
+          @include media-breakpoint-up(xxl) {
+            letter-spacing: 0;
+          }
+        }
+      }
+    }
+    & + .lang {
+      a {
+        font-size: $font-size-lg;
+        padding: $nav-link-padding-y 0;
+        letter-spacing: 0.08em;
+      }
+    }
+  }
+}
+
+.burger-container {
+  width: 46px;
+  height: 44px;
+  padding: 0 0.8rem;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.burger-bar {
+  height: 2px;
+  width: 30px;
+  position: relative;
+  background-color: $primary;
+  transition: all 0s 0.3s;
+  &::before, &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: $primary;
+  }
+  &::before {
+    bottom: 7px;
+    transition: bottom 0.3s 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+      transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  &::after {
+    top: 7px;
+    transition: top 0.3s 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+      transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+}
+
+.burger-container.is-animate {
+  .burger-bar {
+    background: transparent;
+    &::before, &::after {
+      bottom: 0;
+      transform: rotate(-45deg);
+      transition: bottom 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+        transform 0.3s 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    &::after {
+      top: 0;
+      bottom: initial;
+      transform: rotate(45deg);
+    }
+  }
+}

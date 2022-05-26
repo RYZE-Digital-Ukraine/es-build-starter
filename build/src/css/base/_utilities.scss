@@ -1,0 +1,68 @@
+//
+// Utilities
+//
+
+@import "node_modules/bootstrap/scss/utilities";
+$utilities: map-remove($utilities, "align", "float", "align-self", "font-family");
+$utilities: map-merge(
+  $utilities,
+  (
+  "min-viewport-height": (
+      property: min-height,
+      class: min-vh,
+      values: (
+        20: calc(var(--vh, 1vh) * 20),
+        40: calc(var(--vh, 1vh) * 40),
+        60: calc(var(--vh, 1vh) * 60),
+        80: calc(var(--vh, 1vh) * 80),
+        100: calc(var(--vh, 1vh) * 100)
+      )
+    ),
+  )
+);
+//
+// Border-variant
+//
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    .border#{$infix}-top {
+      border-top: $border-width solid $border-color;
+    }
+    .border#{$infix}-right {
+      border-right: $border-width solid $border-color;
+    }
+    .border#{$infix}-bottom {
+      border-bottom: $border-width solid $border-color;
+    }
+    .border#{$infix}-left {
+      border-left: $border-width solid $border-color;
+    }
+
+    .border#{$infix}-top-0 {
+      border-top: 0 !important;
+    }
+    .border#{$infix}-right-0 {
+      border-right: 0 !important;
+    }
+    .border#{$infix}-bottom-0 {
+      border-bottom: 0 !important;
+    }
+    .border#{$infix}-left-0 {
+      border-left: 0 !important;
+    }
+
+    .border#{$infix}-x {
+      border-right: $border-width solid $border-color;
+      border-left: $border-width solid $border-color;
+    }
+
+    .border#{$infix}-y {
+      border-top: $border-width solid $border-color;
+      border-bottom: $border-width solid $border-color;
+    }
+  }
+}
+
+@import "node_modules/bootstrap/scss/utilities/api";

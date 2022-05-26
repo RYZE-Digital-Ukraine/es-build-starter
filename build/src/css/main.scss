@@ -1,8 +1,35 @@
-@import "./base/fonts";
+// The main value of font-size (for inheritance)
+$base-value: 10px !default;
 
-$blue: #0000ff;
-body {
-  h1 {
-    color: $blue;
+// Tools
+@import "tools/functions";
+@import "tools/variables";
+@import "tools/mixins";
+@import "tools/helpers";
+@import "tools/transitions";
+
+// Vendor
+@import "vendor/reboot";
+// @import "vendor/import/selectbox";
+
+// Base
+@import "base/grid";
+@import "base/fonts";
+@import "base/general";
+@import "base/article";
+@import "base/utilities";
+@import "base/type";
+
+// Modules
+@import "modules/buttons";
+@import "modules/tables";
+@import "modules/header";
+@import "modules/footer";
+
+.debug {
+  border: $border-width solid $red;
+  & > * {
+    border: $border-width solid $red;
   }
 }
+

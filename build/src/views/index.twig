@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include './parts/meta.twig' %}
+</head>
+<body>
+  <h1>It's working better</h1>
+  <section class="page-section">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h2>{{ greetings }}</h2>
+        </div>
+        <div class="col">
+          <h2>{{ greetings }}</h2>
+        </div>
+        <div class="col">
+          <h2>{{ greetings }}</h2>
+        </div>
+      </div>
+    <div>
+  </section>
+
+  {% for item in externalscripts %}
+    <script src="{{ item["link"]|e }}"></script>
+  {% endfor %}
+
+  <script src="./js/index.js"></script>
+</body>
+</html>

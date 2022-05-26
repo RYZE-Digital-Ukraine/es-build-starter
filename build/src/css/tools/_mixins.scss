@@ -1,0 +1,96 @@
+// Toggles
+//
+// Used in conjunction with global variables to enable certain theme features.
+
+// Vendor
+@import "node_modules/bootstrap/scss/vendor/rfs";
+
+// Deprecate
+// @import "node_modules/bootstrap/scss/mixins/deprecate";
+
+// Helpers
+@import "node_modules/bootstrap/scss/mixins/breakpoints";
+@import "node_modules/bootstrap/scss/mixins/color-scheme";
+@import "node_modules/bootstrap/scss/mixins/image";
+@import "node_modules/bootstrap/scss/mixins/resize";
+@import "node_modules/bootstrap/scss/mixins/visually-hidden";
+@import "node_modules/bootstrap/scss/mixins/reset-text";
+@import "node_modules/bootstrap/scss/mixins/text-truncate";
+
+// Utilities
+@import "node_modules/bootstrap/scss/mixins/utilities";
+
+// Components
+// @import "node_modules/bootstrap/scss/mixins/alert";
+// @import "node_modules/bootstrap/scss/mixins/backdrop";
+@import "node_modules/bootstrap/scss/mixins/buttons";
+// @import "node_modules/bootstrap/scss/mixins/caret";
+// @import "node_modules/bootstrap/scss/mixins/pagination";
+@import "node_modules/bootstrap/scss/mixins/lists";
+// @import "node_modules/bootstrap/scss/mixins/list-group";
+@import "node_modules/bootstrap/scss/mixins/forms";
+@import "node_modules/bootstrap/scss/mixins/table-variants";
+
+// Skins
+@import "node_modules/bootstrap/scss/mixins/border-radius";
+@import "node_modules/bootstrap/scss/mixins/box-shadow";
+@import "node_modules/bootstrap/scss/mixins/gradients";
+@import "node_modules/bootstrap/scss/mixins/transition";
+
+// Layout
+@import "node_modules/bootstrap/scss/mixins/clearfix";
+@import "node_modules/bootstrap/scss/mixins/container";
+@import "node_modules/bootstrap/scss/mixins/grid";
+
+
+/*
+  This mixin can be used to set the object-fit:
+  @include object-fit(contain);
+
+  or object-fit and object-position:
+  @include object-fit(cover, top);
+*/
+@mixin object-fit($fit: fill, $position: null) {
+  object-fit: $fit;
+  @if $position {
+    font-family: "object-fit: #{$fit}; object-position: #{$position}";
+    object-position: $position;
+  } @else {
+    font-family: "object-fit: #{$fit}";
+  }
+}
+
+// Calculate responsive font size
+@mixin fluid($min-vw, $max-vw, $min-size, $max-size, $prop: "font-size", $priority: false) {
+  $u1: unit($min-vw);
+  $u2: unit($max-vw);
+  $u3: unit($min-size);
+  $u4: unit($max-size);
+  $suffix: if($priority, "!important", "");
+
+  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+    & {
+      @if $priority {
+        #{$prop}: $min-size;
+      }
+      $min-vw-px: strip-unit($min-vw) * $base-value;
+      $max-vw-px: strip-unit($max-vw) * $base-value;
+      @media screen and (min-width: $min-vw-px) {
+         #{$prop}: calc(
+          #{$min-size} + #{strip-unit($max-size - $min-size)} *
+            ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
+        );
+      }
+      @media screen and (min-width: $max-vw-px) {
+         #{$prop}: $max-size;
+      }
+    }
+  }
+}
+
+/*
+Example of usage:
+ @include fluid($vw-576, $vw-1200, $h3-font-size, $font-size-lg, $priority: true);
+ @include fluid($vw-1920, $vw-2560, $font-size-lg, $font-size-lg * 1.3);
+ ...and so on, and so on
+*/

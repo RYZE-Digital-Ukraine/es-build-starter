@@ -1,0 +1,179 @@
+article,
+.article {
+  width: 100%;
+  @include fluid($vw-576, $vw-1200, $font-size-base, $font-size-lg, $priority: true);
+  @include media-breakpoint-up(lg) {
+    width: 75%;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  div {
+    max-width: 100%;
+    line-height: $line-height-base;
+    margin: 0 auto $paragraph-margin-bottom * 2;
+    div {
+      margin-bottom: 0;
+    }
+  }
+  ol,
+  ul {
+    margin: 0 auto $paragraph-margin-bottom * 2;
+    li {
+      list-style-type: disc;
+      margin-bottom: $paragraph-margin-bottom * 2;
+    }
+    list-style-position: inside;
+    div {
+      display: inline;
+    }
+  }
+  ol {
+    padding-left: $spacer * 2;
+    li {
+      list-style-type: decimal;
+      list-style-position: outside;
+    }
+  }
+  img {
+    margin-bottom: $paragraph-margin-bottom;
+  }
+  .aligncenter {
+    margin: 0 auto;
+    margin-bottom: $spacer;
+  }
+  .alignright {
+    float: right;
+    margin-left: $spacer;
+    margin-bottom: $spacer;
+  }
+  .alignleft {
+    float: left;
+    margin-right: $spacer;
+    margin-bottom: $spacer;
+  }
+  table {
+    width: 100%;
+    border: $table-border-width solid $table-border-color;
+    th,
+    td {
+      padding: $table-cell-padding;
+      vertical-align: top;
+      border: $table-border-width solid $table-border-color;
+    }
+    thead th {
+      vertical-align: bottom;
+      border-bottom: (2 * $table-border-width) solid $table-border-color;
+    }
+    tbody + tbody {
+      border-top: (2 * $table-border-width) solid $table-border-color;
+    }
+  }
+  .page & {
+    figcaption {
+      color: $blue;
+      font-size: 1.4rem;
+    }
+  }
+  // blockquote {
+  //   position: relative;
+  //   margin-bottom: $spacer;
+  //   letter-spacing: normal;
+  //   font-style: italic;
+  //   @include fluid($vw-1600, $vw-2560, $font-size-base, $font-size-base * 1.5);
+  //   @include fluid($vw-576, $vw-1200, $font-size-sm, $font-size-base);
+  //   @include fluid($vw-576, $vw-1200, 4rem, 5rem, "text-indent");
+  //   quotes: "\201C""\201D""\2018""\2019";
+  //   @include media-breakpoint-up(lg) {
+  //     max-width: 66.5%;
+  //     margin: $spacer auto;
+  //   }
+  //   &:before {
+  //     content: open-quote;
+  //     position: absolute;
+  //     top: $spacer * 2;
+  //     left: -$spacer * 4;
+  //     line-height: 0;
+  //     @include fluid($vw-576, $vw-1200, 4rem, 5rem);
+  //     color: $light-blue;
+  //   }
+  // }
+  // video, iframe {
+  //   border-radius: $btn-border-radius;
+  //   margin-bottom: $spacer;
+  //   overflow: hidden;
+  // }
+  // figure {
+  //   margin-bottom: $spacer;
+  //   z-index: 1;
+  //   figcaption {
+  //     font-size: $font-size-sm;
+  //     color: $gray-500;
+  //     text-align: center;
+  //   }
+  // }
+  // .gallery {
+  //   padding: $spacer/2 0;
+  //   .gallery-item {
+  //     float: left;
+  //     margin: 0;
+  //     text-align: center;
+  //     padding: $spacer/2;
+  //   }
+  //   .gallery-caption,
+  //   .gallery-icon {
+  //     margin: 0;
+  //   }
+  //   .gallery-caption {
+  //     font-size: $font-size-sm;
+  //     color: $gray-500;
+  //   }
+  // }
+
+  // .gallery-columns-1 .gallery-item {
+  //   width: 100%;
+  // }
+
+  // .gallery-columns-2 .gallery-item {
+  //   width: 50%;
+  // }
+
+  // .gallery-columns-3 .gallery-item {
+  //   width: 33.333%;
+  // }
+
+  // .gallery-columns-4 .gallery-item {
+  //   width: 25%;
+  // }
+
+  // .gallery-columns-5 .gallery-item {
+  //   width: 20%;
+  // }
+
+  // .gallery-columns-6 .gallery-item {
+  //   width: 16.665%;
+  // }
+
+  // .gallery-columns-7 .gallery-item {
+  //   width: 14.285%;
+  // }
+
+  // .gallery-columns-8 .gallery-item {
+  //   width: 12.5%;
+  // }
+
+  // .gallery-columns-9 .gallery-item {
+  //   width: 11.111%;
+  // }
+  // img {
+  //   display: block;
+  //   margin: $spacer/2 auto;
+  //   @include img-fluid();
+  //   border-radius: $btn-border-radius;
+  //   margin-bottom: $spacer;
+  // }
+}

@@ -1,0 +1,19 @@
+// Bootstrap functions
+//
+// Utility mixins and functions for evaluating source code across our variables, maps, and mixins.
+@import "node_modules/bootstrap/scss/functions";
+
+@function strip-unit($value) {
+  @if type-of($value) == "number" and not unitless($value) {
+    @return divide($value, ($value * 0 + 1));
+  }
+  @return $value;
+}
+
+@function rem-calc($pxval, $base: $base-value) {
+  $value: divide(strip-unit($pxval), strip-unit($base)) * 1rem;
+  @if ($value == 0rem) {
+    $value: 0;
+  } // Turn 0rem into 0
+  @return $value;
+}

@@ -8,6 +8,7 @@
 
 # production
 # dist
+/build/dist
 
 # ftp + archives
 .ftpconfig

@@ -1,0 +1,101 @@
+.wrapper {
+  @extend .min-vh-100;
+  @extend .vstack;
+  @include media-breakpoint-down(md) {
+    margin-top: 115px;
+  }
+  @include media-breakpoint-down(lg) {
+    margin-top: 160px;
+  }
+  @include media-breakpoint-down(xl) {
+    margin-top: 200px;
+  }
+}
+
+.page {
+ &-section {
+    position: relative;
+    overflow: hidden;
+    margin: 0 0 rem-calc(110px) 0;
+
+  &:not(:first-of-type) {
+    padding-top: 110px;
+  }
+
+    @include media-breakpoint-up(lg) {
+      margin: 0 0 rem-calc(110px) 0;
+    }
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}
+// .icon {
+//   &-contact {
+//     width: 24px;
+//     height: 24px;
+//     min-width: 24px;
+//     min-height: 24px;
+//   }
+// }
+
+// Responsive images (ensure images don't scale beyond their parents)
+//
+// This is purposefully opt-in via an explicit class rather than being the default for all `<img>`s.
+// We previously tried the "images are responsive by default" approach in Bootstrap v2,
+// and abandoned it in Bootstrap v3 because it breaks lots of third-party widgets (including Google Maps)
+// which weren't expecting the images within themselves to be involuntarily resized.
+// See also https://github.com/twbs/bootstrap/issues/18178
+.img-fluid, img {
+  @include img-fluid();
+}
+
+.img-fit {
+  @include object-fit(cover, center);
+  & > img {
+    @include object-fit(cover, center);
+  }
+  &_contain {
+    & > img {
+      @include object-fit(contain, center);
+    }
+  }
+  &_top {
+    & > img {
+      @include object-fit(cover, top);
+    }
+  }
+}
+
+// Image thumbnails
+.img-thumbnail {
+  padding: $thumbnail-padding;
+  background-color: $thumbnail-bg;
+  border: $thumbnail-border-width solid $thumbnail-border-color;
+  @include border-radius($thumbnail-border-radius);
+  @include box-shadow($thumbnail-box-shadow);
+
+  // Keep them at most 100% wide
+  @include img-fluid();
+}
+
+// Custom
+p {
+  margin-bottom: 2rem;
+}
+
+// Button Secondary
+.btn-alt {
+  border: 2px solid $primary;
+  background-color: $white;
+  color: $primary;
+  padding: 0.5rem 2.2rem 0.5rem 1.7rem;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  text-transform: uppercase;
+
+  &:hover {
+    border: 2px solid $info;
+  }
+}
