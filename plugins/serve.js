@@ -14,8 +14,8 @@ const esbuildServe = async (options = {}, bsOptions = {}) => {
 
   const bs = devMode ? browserSync.create() : null;
 
-  const initBuild = () => {
-    esbuild
+  const initBuild = async () => {
+    await esbuild
       .build({...options})
       .then(() => bs.reload())
       .catch(() => process.exit(1));
@@ -23,8 +23,7 @@ const esbuildServe = async (options = {}, bsOptions = {}) => {
 
   // Start the server
   if (bs) {
-    initBuild();
-    bs.init(config);
+    initBuild().then(() => bs.init(config));
     bs.watch(`${paths.src}/**/*.*`).on('change', initBuild);
   }
 

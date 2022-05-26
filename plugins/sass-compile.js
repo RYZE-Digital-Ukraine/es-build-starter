@@ -3,16 +3,19 @@ import { sassPlugin } from "esbuild-sass-plugin";
 import postcss from 'postcss';
 import autoprefixer from 'autoprefixer';
 
-
 const config = {
-  async transform(source) {
+  loadPaths: ['./']
+};
+
+if (devMode) {
+  config.transform = async (source) => {
     const { css } = await postcss([autoprefixer]).process(source, {
       from: `${paths.getCSS().src}main.scss`
     });
     return css;
   }
-};
+}
 
-const cssPlugin = !devMode ? sassPlugin(config) : sassPlugin();
+const cssPlugin = sassPlugin(config);
 
 export default cssPlugin;

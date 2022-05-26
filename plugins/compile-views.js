@@ -3,15 +3,17 @@ import Twig from 'twig';
 import fs from 'fs';
 import path from 'path';
 
+Twig.cache(false);
+
 const compileViewsPlugin = {
   name: 'compile-views',
   setup(build) {
     build.onEnd(() => {
       let twigArr = [];
-      let vars = fs.readFileSync(`${paths.src}/twig-vars.json`, { encoding: 'utf8' });
+      let vars = fs.readFileSync(`${paths.src}/views/twig-vars.json`, { encoding: 'utf8' });
 
       if (utils.isJson(vars)) {
-        let files = fs.readdirSync(paths.src);
+        let files = fs.readdirSync(`${paths.src}/views`);
 
         files.forEach(file => {
           if (path.extname(file) == '.twig')
@@ -19,7 +21,7 @@ const compileViewsPlugin = {
         });
 
         twigArr.forEach((filename) => {
-          Twig.renderFile(`${paths.src}/${filename}`, JSON.parse(vars), (err, html) => {
+          Twig.renderFile(`${paths.src}/views/${filename}`, JSON.parse(vars), (err, html) => {
             if (err) {
               console.error('\x1b[31m', err, '\x1b[0m');
               return;
