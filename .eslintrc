@@ -1,6 +1,16 @@
 {
   "extends": "eslint-config-airbnb-base",
   "env": {
-    "jquery": true
-  }
+    "jquery": true,
+    "browser": true,
+    "node": true
+  },
+  "overrides": [
+    {
+      "files": ["build/src/js/*.js"],
+      "rules": {
+        "quotes": ["error", "single"]
+      }
+    }
+  ]
 }
