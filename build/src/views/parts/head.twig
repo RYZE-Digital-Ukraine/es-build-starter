@@ -1,0 +1,14 @@
+<head>
+  <meta charset="{{ head.charset }}">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content="{{ head.meta.theme }}">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#fff">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <title>{{ head.title }}</title>
+  {% for size, item in head.link.icon %}
+    <link rel="icon" sizes="{{ size }}" href="{{ item|e }}" type="image/png">
+  {% endfor %}
+  {% for item in head.link.stylesheet %}
+    <link rel="stylesheet" href="{{ item }}">
+  {% endfor %}
+</head>

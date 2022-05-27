@@ -1,28 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  {% include './parts/meta.twig' %}
-</head>
+<html lang="{{ lang }}">
+
+{% include './parts/head.twig' %}
+
 <body>
-  <h1>It's working better</h1>
+  <h1>ESBuild Bootstrap 5 Starter</h1>
   <section class="page-section">
     <div class="container">
       <div class="row">
         <div class="col">
-          <h2>{{ greetings }}</h2>
+          <h2>{{ head.title }}</h2>
         </div>
         <div class="col">
-          <h2>{{ greetings }}</h2>
+          <h2>{{ head.title }}</h2>
         </div>
         <div class="col">
-          <h2>{{ greetings }}</h2>
+          <h2>{{ head.title }}</h2>
         </div>
       </div>
     <div>
   </section>
 
+  <div class="items">
+    <div class="item">qweqwe</div>
+    <div class="item">qweqwe</div>
+    <div class="item">qweqwe</div>
+  </div>
+
+  <img src="{{ placeholders.img }}/560x360" alt="Image">
+
   {% for item in externalscripts %}
-    <script src="{{ item["link"]|e }}"></script>
+    <script src="{{ item }}"></script>
   {% endfor %}
 
   <script src="./js/index.js"></script>

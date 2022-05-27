@@ -1,11 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  {% include './parts/meta.twig' %}
-</head>
+<html lang="{{ lang }}">
+
+{% include './parts/head.twig' %}
+
 <body>
-  <h1>It's contacts page</h1>
-  <h2>{{ greetings }}</h2>
+  <h1>ESBuild Starter</h1>
+  <section class="page-section">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h2>{{ title }}</h2>
+        </div>
+        <div class="col">
+          <h2>{{ title }}</h2>
+        </div>
+        <div class="col">
+          <h2>{{ title }}</h2>
+        </div>
+      </div>
+    <div>
+  </section>
+
+  <img src="{{ placeholders.img }}/360x360" alt="Image">
+
+  {% for item in externalscripts %}
+    <script src="{{ item }}"></script>
+  {% endfor %}
+
   <script src="./js/index.js"></script>
 </body>
 </html>

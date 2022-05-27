@@ -32,6 +32,7 @@
     "imagemin-svgo": "^10.0.1",
     "imagemin-webp": "^7.0.0",
     "postcss": "^8.4.12",
+    "smart-grid": "^2.1.2",
     "stylelint": "^14.8.4",
     "stylelint-config-standard": "^25.0.0",
     "svg-sprite": "^1.5.4",

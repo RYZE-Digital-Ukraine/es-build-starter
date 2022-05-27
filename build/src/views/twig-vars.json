@@ -1,12 +1,26 @@
 {
-  "title": "ESBuild",
-  "greetings": "Hello, world!",
-  "externalscripts": {
-      "jquery": {
-        "link": "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+  "lang": "en",
+  "head": {
+    "charset": "UTF-8",
+    "title": "ESBuild",
+    "meta": {
+      "theme": "#fff"
+    },
+    "link": {
+      "icon": {
+        "16x16": "./imgs/favicon-16x16.png",
+        "32x32": "./imgs/favicon-32x32.png"
       },
-      "chart": {
-        "link": "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+      "stylesheet": {
+        "main": "./css/main.css"
       }
     }
+  },
+  "externalscripts": {
+      "jquery": "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js",
+      "chart": "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"
+  },
+  "placeholders": {
+    "img": "https://via.placeholder.com"
+  }
 }
