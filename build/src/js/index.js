@@ -13,12 +13,12 @@ import {
   showMenu,
   // setProgress,
   scrollHeader,
-  //setIntersectionObserver,
+  // setIntersectionObserver,
   // setAspectRatioVideo,
   // Modal,
   // Timer,
   // customCursor,
-} from "./import/helpers";
+} from './import/helpers';
 
 class App {
   constructor() {
@@ -28,23 +28,23 @@ class App {
   }
 
   addEventListeners() {
-    $(window).on("scroll", () => {
+    $(window).on('scroll', () => {
       scrollHeader();
     });
 
-    $(window).on("load", () => {
+    $(window).on('load', () => {
       // End Loader prod
-      console.log("App init\n");
+      console.log('App init\n');
     });
 
-    $(window).on("resize", () => {
+    $(window).on('resize', () => {
       // setFullHeight();
     });
 
     // Elements events
-    $(".to-top, a[href^='#sec']").on("click", scrollTo);
-    $("#nav-toggle").on("click", () => showMenu());
-    $(".accordion__title").on("click", accordionMenu);
+    $('.to-top, a[href^=\'#sec\']').on('click', scrollTo);
+    $('#nav-toggle').on('click', () => showMenu());
+    $('.accordion__title').on('click', accordionMenu);
   }
 
   init() {

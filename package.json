@@ -1,13 +1,25 @@
 {
   "name": "esbuild",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "## Commands * `npm run dev` - start * `npm run build` - build project with optimizations",
   "main": "esbuild.config.js",
   "scripts": {
     "build": "node esbuild.config.js",
     "dev": "cross-env ESBUILD_DEV=true node esbuild.config.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RYZE-Digital-Ukraine/es-build-starter.git"
+  },
+  "keywords": [
+    "ESBuild",
+    "JS",
+    "BABEL",
+    "TWIG",
+    "SASS",
+    "SCSS"
+  ],
   "author": "Ryze Digital",
   "license": "ISC",
   "devDependencies": {
@@ -34,7 +46,7 @@
     "postcss": "^8.4.12",
     "smart-grid": "^2.1.2",
     "stylelint": "^14.8.4",
-    "stylelint-config-standard": "^25.0.0",
+    "stylelint-config-standard-scss": "^3.0.0",
     "svg-sprite": "^1.5.4",
     "twig": "^1.15.4"
   },

@@ -1,4 +1,4 @@
-import { paths, devMode, settings, smartGrid, smartGridSettings } from './esbuild.options.js';
+import { paths, devMode, settings, smartGrid } from './esbuild.options.js';
 import esbuild from 'esbuild';
 import esbuildServe from './plugins/serve.js';
 import smartgrid from 'smart-grid';
@@ -10,6 +10,7 @@ import svgSpritePlugin from './plugins/svg-sprite.js';
 import clearDirPlugin from './plugins/clear-dir.js';
 import imgMinPlugin from './plugins/image-min.js';
 import cssPlugin from './plugins/sass-compile.js';
+import csslintPlugin from './plugins/style-lint.js';
 // import eslintPlugin from './plugins/es-lint.js';
 import babelPlugin from './plugins/babel.js';
 
@@ -17,6 +18,7 @@ const devPlugins = [
   clearDirPlugin,
   compileViewsPlugin,
   svgSpritePlugin,
+  csslintPlugin,
   // eslintPlugin,
   cssPlugin,
   copyStaticFilesPlugin,
@@ -50,7 +52,7 @@ const config = {
 
 if (devMode) {
   if (smartGrid) {
-    smartgrid('./build/src/css/base', smartGridSettings);
+    smartgrid(`${paths.getCSS().src}base`, settings.smartGrid);
   }
   esbuildServe(config)
   .then(() => console.log('⚡ Serve! ⚡'));

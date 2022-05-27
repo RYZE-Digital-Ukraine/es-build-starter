@@ -1,7 +1,7 @@
-import { devMode, paths } from '../esbuild.options.js';
 import fs from 'fs';
 import path from 'path';
 import copyStaticFilesPlugin from 'esbuild-copy-static-files';
+import { devMode, paths } from '../esbuild.options.js';
 
 const copyStaticFilesOptions = {
   src: paths.src,
@@ -15,12 +15,12 @@ const copyStaticFilesOptions = {
     }
     let curDir = staticPath.split(path.sep);
 
-    curDir = curDir[curDir.length - 1]
+    curDir = curDir[curDir.length - 1];
 
     if (exts.includes(path.extname(staticPath)) || (fs.lstatSync(staticPath).isDirectory() && folders.includes(curDir))) {
-      return true
+      return true;
     }
-    return false
+    return false;
   },
 };
 
