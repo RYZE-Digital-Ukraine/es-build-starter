@@ -3,7 +3,7 @@
 ## Requirements 📛
 * Installed [NodeJS](https://nodejs.org/en/) (`>=16.0.7`)
 
-## Installation
+## Installation ✅
 * go to downloaded directory: `cd *foldername*`
 * download all dependencies: `npm i`
 * setup env variables, you need:
