@@ -1,7 +1,7 @@
 # ⚡ ESBuild starter ⚡
 
 ## Requirements 📛
-* Installed [NodeJS](https://nodejs.org/en/) (`>=16.0.7`)
+* Installed [NodeJS](https://nodejs.org/en/) (`>=16.7.0`)
 
 ## Installation ✅
 * go to downloaded directory: `cd *foldername*`
