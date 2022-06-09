@@ -54,4 +54,4 @@ esbuild-starter/
 ```
 
 ## Contributing 🤙
-* Site: [ryze-digital](https://www.ryze-digital.de/de/)
+* Contact: [savvoff](https://t.me/savvoff)
