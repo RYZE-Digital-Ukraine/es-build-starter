@@ -8,7 +8,7 @@ const imgMinPlugin = {
   name: 'img-min-plugin',
   setup(build) {
     build.onEnd(() => {
-      imagemin([`${paths.getImgs().src}**/*.{jpg, jpeg, png}`], {
+      imagemin([`${paths.getImgs().src}**/*.{jpg,jpeg,png}`], {
         destination: paths.getImgs().dist,
         plugins: [
           imageminJpegtran(),

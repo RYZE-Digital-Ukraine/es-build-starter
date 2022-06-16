@@ -7,7 +7,7 @@ const copyStaticFilesOptions = {
   src: paths.src,
   dest: paths.dist,
   filter(staticPath) {
-    const exts = ['.woff2', '.woff', '.eot', '.ttf'];
+    const exts = ['.ttf'];
     const folders = ['src', 'fonts'];
     if (devMode) {
       exts.push(...['.jpg', '.jpeg', '.png']);
