@@ -47,6 +47,7 @@ const devMode = process.env.ESBUILD_DEV === "true" || false,
     },
   },
   settings = {
+    inlineCSS: false,
     support: ["chrome58", "firefox57", "safari11", "edge16"],
     smartGrid: {
       filename: "_grid",
