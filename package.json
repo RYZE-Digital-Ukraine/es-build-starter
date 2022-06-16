@@ -1,7 +1,7 @@
 {
   "name": "esbuild",
   "type": "module",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "## Commands * `npm run dev` - start * `npm run build` - build project with optimizations",
   "main": "esbuild.config.js",
   "scripts": {
@@ -52,6 +52,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.1.3",
-    "jquery": "^3.6.0"
+    "jquery": "^3.6.0",
+    "swiper": "^8.2.2"
   }
 }
