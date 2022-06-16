@@ -3,44 +3,44 @@
 // Used in conjunction with global variables to enable certain theme features.
 
 // Vendor
-@import "node_modules/bootstrap/scss/vendor/rfs";
+@import "~bootstrap/scss/vendor/rfs";
 
 // Deprecate
-// @import "node_modules/bootstrap/scss/mixins/deprecate";
+// @import "~bootstrap/scss/mixins/deprecate";
 
 // Helpers
-@import "node_modules/bootstrap/scss/mixins/breakpoints";
-@import "node_modules/bootstrap/scss/mixins/color-scheme";
-@import "node_modules/bootstrap/scss/mixins/image";
-@import "node_modules/bootstrap/scss/mixins/resize";
-@import "node_modules/bootstrap/scss/mixins/visually-hidden";
-@import "node_modules/bootstrap/scss/mixins/reset-text";
-@import "node_modules/bootstrap/scss/mixins/text-truncate";
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~bootstrap/scss/mixins/color-scheme";
+@import "~bootstrap/scss/mixins/image";
+@import "~bootstrap/scss/mixins/resize";
+@import "~bootstrap/scss/mixins/visually-hidden";
+@import "~bootstrap/scss/mixins/reset-text";
+@import "~bootstrap/scss/mixins/text-truncate";
 
 // Utilities
-@import "node_modules/bootstrap/scss/mixins/utilities";
+@import "~bootstrap/scss/mixins/utilities";
 
 // Components
-// @import "node_modules/bootstrap/scss/mixins/alert";
-// @import "node_modules/bootstrap/scss/mixins/backdrop";
-@import "node_modules/bootstrap/scss/mixins/buttons";
-// @import "node_modules/bootstrap/scss/mixins/caret";
-// @import "node_modules/bootstrap/scss/mixins/pagination";
-@import "node_modules/bootstrap/scss/mixins/lists";
-// @import "node_modules/bootstrap/scss/mixins/list-group";
-@import "node_modules/bootstrap/scss/mixins/forms";
-@import "node_modules/bootstrap/scss/mixins/table-variants";
+// @import "~bootstrap/scss/mixins/alert";
+// @import "~bootstrap/scss/mixins/backdrop";
+@import "~bootstrap/scss/mixins/buttons";
+// @import "~bootstrap/scss/mixins/caret";
+// @import "~bootstrap/scss/mixins/pagination";
+@import "~bootstrap/scss/mixins/lists";
+// @import "~bootstrap/scss/mixins/list-group";
+@import "~bootstrap/scss/mixins/forms";
+@import "~bootstrap/scss/mixins/table-variants";
 
 // Skins
-@import "node_modules/bootstrap/scss/mixins/border-radius";
-@import "node_modules/bootstrap/scss/mixins/box-shadow";
-@import "node_modules/bootstrap/scss/mixins/gradients";
-@import "node_modules/bootstrap/scss/mixins/transition";
+@import "~bootstrap/scss/mixins/border-radius";
+@import "~bootstrap/scss/mixins/box-shadow";
+@import "~bootstrap/scss/mixins/gradients";
+@import "~bootstrap/scss/mixins/transition";
 
 // Layout
-@import "node_modules/bootstrap/scss/mixins/clearfix";
-@import "node_modules/bootstrap/scss/mixins/container";
-@import "node_modules/bootstrap/scss/mixins/grid";
+@import "~bootstrap/scss/mixins/clearfix";
+@import "~bootstrap/scss/mixins/container";
+@import "~bootstrap/scss/mixins/grid";
 
 
 /*

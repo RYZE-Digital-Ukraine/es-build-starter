@@ -1,7 +1,7 @@
 // Bootstrap functions
 //
 // Utility mixins and functions for evaluating source code across our variables, maps, and mixins.
-@import "node_modules/bootstrap/scss/functions";
+@import "~bootstrap/scss/functions";
 
 @function strip-unit($value) {
   @if type-of($value) == "number" and not unitless($value) {
