@@ -4,7 +4,7 @@ import postcss from 'postcss';
 import autoprefixer from 'autoprefixer';
 
 const config = {
-  loadPaths: ['./'],
+  cssImports: true,
   type: settings.inlineCSS ? 'style' : 'css',
 };
 
