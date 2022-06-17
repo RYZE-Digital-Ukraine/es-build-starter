@@ -42,6 +42,7 @@ const config = {
   },
   color: true,
   entryPoints: [`${paths.getJS().src}index.js`, `${paths.getCSS().src}main.scss`],
+  loader: {'.woff': 'dataurl', '.woff2': 'dataurl'},
   outdir: paths.dist,
   target: !devMode ? settings.support : [],
   sourcemap: devMode,
