@@ -4,11 +4,11 @@ import postcss from 'postcss';
 import autoprefixer from 'autoprefixer';
 
 const config = {
-  cssImports: true,
   type: settings.inlineCSS ? 'style' : 'css',
+  cssImports: true,
 };
 
-if (devMode) {
+if (!devMode) {
   config.transform = async (source) => {
     const { css } = await postcss([autoprefixer]).process(source, { from: undefined });
     return css;
