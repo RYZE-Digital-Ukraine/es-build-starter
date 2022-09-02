@@ -56,11 +56,11 @@ if (devMode) {
     smartgrid(`${paths.getCSS().src}base`, settings.smartGrid);
   }
   esbuildServe(config)
-  .then(() => console.log('⚡ Serve! ⚡'));
+    .then(() => console.log('⚡ Serve! ⚡'));
 } else {
   esbuild
-  .build(config)
-  .then(() => console.log('⚡ Build complete! ⚡'))
-  .catch(() => process.exit(1));
+    .build(config)
+    .then(() => console.log('⚡ Build complete! ⚡'))
+    .catch(() => process.exit(1));
 }
 
