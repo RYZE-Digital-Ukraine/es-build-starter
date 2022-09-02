@@ -3,7 +3,7 @@ import { options } from './import/options';
 import {
   embedYoutube,
   accordionMenu,
-  // setFullHeight,
+  setFullHeight,
   // fillInput,
   // expander,
   scrollTo,
@@ -23,8 +23,20 @@ import {
 class App {
   constructor() {
     this.addEventListeners();
+    this.loadSvgOnPage();
     embedYoutube();
+    setFullHeight();
     this.initPhrase = 'App init';
+  }
+
+  loadSvgOnPage() {
+    const sprite = document.getElementById('sprite');
+    const path = sprite.dataset.path || '';
+    fetch(`${path}/imgs/stack/sprite.svg`)
+      .then((res) => res.text())
+      .then((text) => {
+        sprite.innerHTML = text;
+      });
   }
 
   addEventListeners() {
@@ -38,7 +50,7 @@ class App {
     });
 
     $(window).on('resize', () => {
-      // setFullHeight();
+      setFullHeight();
     });
 
     // Elements events

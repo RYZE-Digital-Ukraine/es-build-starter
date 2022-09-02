@@ -9,6 +9,6 @@
     <link rel="icon" sizes="{{ size }}" href="{{ item|e }}" type="image/png">
   {% endfor %}
   {% for item in head.link.stylesheet %}
-    <link rel="stylesheet" href="{{ item }}">
+    <link rel="stylesheet" href="{{ item|e }}">
   {% endfor %}
 </head>
