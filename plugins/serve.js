@@ -18,7 +18,10 @@ const esbuildServe = async (options = {}, bsOptions = {}) => {
     await esbuild
       .build({...options})
       .then(() => bs.reload())
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        const { text } = err.errors[0];
+        console.log(`Error message: ${text}`);
+      });
   };
 
   // Start the server
