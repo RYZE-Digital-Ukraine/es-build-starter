@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html lang="{{ lang }}">
+{% extends "./layouts/base.twig" %}
 
-{% include './parts/head.twig' %}
-
-<body>
+{% block content %}
   <section class="page-section">
     <div class="container">
       <h1>ESBuild Bootstrap 5 Starter</h1>
@@ -11,25 +8,12 @@
         <div class="col">
           <h2>{{ head.title }}</h2>
         </div>
-        <div class="col">
-          <h2>{{ head.title }}</h2>
-        </div>
-        <div class="col">
-          <h2>{{ head.title }}</h2>
-        </div>
       </div>
     <div>
     <div class="row">
       <div class="col">
-        <img src="{{ placeholders.img }}/560x360" alt="Image">
+        <img src="{{ placeholders.img }}/360x360" alt="Image">
       </div>
     </div>
   </section>
-
-  {% for item in externalscripts %}
-    <script src="{{ item }}"></script>
-  {% endfor %}
-
-  <script src="./js/index.js"></script>
-</body>
-</html>
+{% endblock %}
