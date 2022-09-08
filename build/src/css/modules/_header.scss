@@ -6,28 +6,11 @@
   right: 0;
   transition: 0.3s $ease-out-cubic;
   z-index: $zindex-fixed;
-  @include media-breakpoint-up(xl) {
-    position: sticky;
-  }
   &-brand {
-    width: 100px;
+    width: 80px;
     transition: 0.3s $ease-out-cubic;
-    @include media-breakpoint-up(md) {
-      width: 170px;
-      .is-scroll & {
-        width: 85px;
-      }
-    }
-  }
-  &__title {
-    overflow: hidden;
-    margin-top: $spacer;
-    color: #ea8c00;
-    letter-spacing: 0.08em;
-    @include fluid($vw-576, $vw-1920, $h6-font-size, $font-size-base * 1.4, $priority: true);
-    transition: 0.3s 0s $ease-out-cubic;
     .is-scroll & {
-      margin-top: -$spacer * 4;
+      width: 55px;
     }
   }
   &__nav {
@@ -51,23 +34,18 @@
       visibility: visible;
     }
     li {
-      // @include media-breakpoint-up(xxl) {
-      //   width: 250px;
-      // }
       a {
+        display: inline-block;
         width: 100%;
-        font-size: rem-calc(16px);
+        font-size: $nav-link-font-size * 1.5;
         padding: $nav-link-padding-y $nav-link-padding-x * 1.5;
-        letter-spacing: 0.08em;
-        @include media-breakpoint-up(lg) {
+        @include media-breakpoint-up(xl) {
+          font-size: $nav-link-font-size;
           padding: $nav-link-padding-y $nav-link-padding-x;
         }
         &:hover {
           color: $white;
           background: $primary;
-          @include media-breakpoint-up(xxl) {
-            letter-spacing: 0;
-          }
         }
       }
     }

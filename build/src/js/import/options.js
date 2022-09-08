@@ -10,6 +10,6 @@ export const options = {
       (Math.random() * (max - min) + min).toFixed(2),
     calcWinsize: () => ({width: window.innerWidth, height: window.innerHeight})
   },
-  body: $("body"), // document.body
-  header: $(".page-header"),
+  body: document.body, // $("body")
+  header: document.querySelector(".page-header"),
 };

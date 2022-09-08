@@ -57,11 +57,11 @@ textarea {
 
 ::-webkit-scrollbar-button {
   display: none;
-  background-color: $blue;
+  background-color: $secondary;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: $blue;
+  background-color: $secondary;
 }
 
 ::-webkit-scrollbar-track-piece {
@@ -71,8 +71,8 @@ textarea {
 ::-webkit-scrollbar-thumb {
   height: 3rem;
   border-radius: $border-radius-sm;
-  background-color: $blue;
+  background-color: $secondary;
 }
 ::-webkit-scrollbar-corner {
-  background-color: $blue;
+  background-color: $secondary;
 }

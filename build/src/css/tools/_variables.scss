@@ -243,7 +243,7 @@ $rfs-rem-value: strip-unit($base-value) !default;
 // Safari iframe resize bug: https://github.com/twbs/rfs/issues/14
 $rfs-safari-iframe-resize-bug-fix: false !default;
 
-$font-family-sans-serif: "Rotis SemiSans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+$font-family-sans-serif: "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
   "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 $font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
 

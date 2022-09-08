@@ -1,9 +1,10 @@
 {
   "lang": "en",
-  "baseurl": "/",
+  "baseurl": "./",
   "head": {
     "charset": "UTF-8",
     "title": "ESBuild",
+    "description": "ESBuild Bootstrap 5 Starter",
     "meta": {
       "theme": "#fff"
     },

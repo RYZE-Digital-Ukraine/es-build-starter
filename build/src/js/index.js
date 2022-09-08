@@ -45,7 +45,8 @@ class App {
     });
 
     $(window).on('load', () => {
-      // End Loader prod
+      scrollHeader();
+      // eslint-disable-next-line
       console.log('App init\n');
     });
 
@@ -63,7 +64,7 @@ class App {
     // eslint-disable-next-line
     if (DEBUG) {
       // eslint-disable-next-line
-      console.log(this.initPhrase, options.body);
+      console.info('Debug is ON');
     }
   }
 }

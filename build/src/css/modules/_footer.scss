@@ -1,3 +1,9 @@
 .page-footer {
   @extend .border-top;
+  &__nav {
+    @extend .page-header__nav;
+    position: static;
+    visibility: visible;
+    opacity: 1;
+  }
 }

@@ -1,14 +1,8 @@
 .wrapper {
   @extend .min-vh-100;
   @extend .vstack;
-  @include media-breakpoint-down(md) {
-    margin-top: 115px;
-  }
   @include media-breakpoint-down(lg) {
-    margin-top: 160px;
-  }
-  @include media-breakpoint-down(xl) {
-    margin-top: 200px;
+    margin-top: 100px;
   }
 }
 

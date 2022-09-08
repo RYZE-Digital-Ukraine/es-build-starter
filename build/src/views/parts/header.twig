@@ -1,11 +1,26 @@
 {# Header component #}
 
-<header class="page-header">
+<header class="page-header border-bottom py-3">
   <div class="container">
     <div class="row">
       <div class="col">
-        <div class="brand">
+        <a href="{{ baseurl }}" class="page-header-brand d-block">
           <img src="{{ baseurl }}imgs/logo.png" alt="Logo">
+        </a>
+      </div>
+      <div class="col hstack">
+        <nav class="page-header__nav d-flex ms-auto">
+          <ul class="d-xl-inline-flex list-unstyled m-auto">
+            <li><a href="{{ baseurl }}sample.html">Sample page</a></li>
+            <li><a href="https://github.com/RYZE-Digital-Ukraine/es-build-starter">Starter pack repo</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="d-flex d-xl-none justify-content-end col-1">
+        <div id="nav-toggle" class="btn d-flex my-auto">
+          <div class="burger-container hstack">
+            <div class="burger-bar"></div>
+          </div>
         </div>
       </div>
     </div>

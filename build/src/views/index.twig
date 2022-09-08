@@ -1,19 +1,29 @@
 {% extends "./layouts/base.twig" %}
 
 {% block content %}
-  <section class="page-section">
+  <section class="page-section pt-5 pt-lg-7">
     <div class="container">
-      <h1>ESBuild Bootstrap 5 Starter</h1>
       <div class="row">
-        <div class="col">
-          <h2>{{ head.title }}</h2>
+        <div class="col mb-5">
+          <h1>{{ head.title }}</h1>
+          <h2>{{ head.description }}</h2>
         </div>
       </div>
     <div>
-    <div class="row">
+    <div class="row row-cols-1 row-cols-sm-3 g-4">
       <div class="col">
-        <img src="{{ placeholders.img }}/360x360" alt="Image">
+        <img src="{{ placeholders.img }}/760x360" alt="Image">
+      </div>
+      <div class="col">
+        <img src="{{ placeholders.img }}/760x360" alt="Image">
+      </div>
+      <div class="col">
+        <img src="{{ placeholders.img }}/760x360" alt="Image">
       </div>
     </div>
   </section>
+{% endblock %}
+
+{% block footer %}
+  {% include './parts/footer.twig' %}
 {% endblock %}
