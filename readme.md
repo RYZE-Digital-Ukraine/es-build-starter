@@ -38,9 +38,11 @@ esbuild-starter/
 │       ├── js/
 │       ├── css/
 │       └── views/
+│           ├── layouts/
 │           ├── parts/
 │           ├── twig-vars.json    
-│           └── index.twig    
+│           ├── index.twig    
+│           └── sample.twig    
 │     
 ├── package.json
 ├── esbuild.config.js
