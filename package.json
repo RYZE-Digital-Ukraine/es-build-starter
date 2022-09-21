@@ -1,7 +1,7 @@
 {
   "name": "esbuild",
   "type": "module",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "## Commands * `npm run dev` - start * `npm run build` - build project with optimizations",
   "main": "esbuild.config.js",
   "scripts": {

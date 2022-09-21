@@ -1,15 +1,16 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-plusplus */
 // import { isMobile } from "mobile-device-detect";
-import { options } from './options';
-// import "simplebar";
+import opts from './options';
 
 // Global helpers
 // YT Player
 function onYouTubeIframeAPIReady() {
-  function onPlayerReady(event) {
-    // event.target.mute();
-    // event.target.playVideo();
-    // $(event.target.h).parent().find('img').fadeOut(3000);
-  }
+  // function onPlayerReady(event) {
+  // event.target.mute();
+  // event.target.playVideo();
+  // $(event.target.h).parent().find('img').fadeOut(3000);
+  // }
 
   const config = {
     height: '100%',
@@ -30,34 +31,43 @@ function onYouTubeIframeAPIReady() {
     },
     videoId: '',
   };
-  $('[data-video]').each((i, el) => {
-    config.videoId = config.playerVars.playlist = $(el).data('id');
-    const $wrap = $(el).parent();
+  document.querySelectorAll('[data-video]').forEach((el) => {
+    // eslint-disable-next-line no-multi-assign
+    config.videoId = config.playerVars.playlist = el.dataset.id;
+    const wrap = el.parentElement;
+    // eslint-disable-next-line no-undef
     const player = new YT.Player(el, config);
-    $wrap.find('button').on('click', (ev) => {
+    wrap.querySelector('button').addEventListener('click', (ev) => {
       player.playVideo();
-      $(ev.currentTarget).fadeOut().prev('img').fadeOut(800);
+      const banner = document.querySelector('.banner');
+      banner.classList.add('hide');
+      ev.currentTarget.classList.add('hide');
     });
   });
 }
 window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
 
-window.blockScroll = function () {
+window.blockScroll = () => {
   const scrollPosition = [
-    this.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft,
-    this.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop,
+    window.pageXOffset
+    || document.documentElement.scrollLeft
+    || document.body.scrollLeft,
+    window.pageYOffset
+    || document.documentElement.scrollTop
+    || document.body.scrollTop,
   ];
-  const html = $('html'); // it would make more sense to apply this to body, but IE7 won't have that
-  html.data('scroll-position', scrollPosition);
-  html.data('previous-overflow', html.css('overflow'));
-  html.css('overflow', 'hidden');
+  // it would make more sense to apply this to body, but IE7 won't have that
+  const html = document.documentElement;
+  html.dataset.scrollPosition = scrollPosition;
+  html.dataset.previousOverflow = html.style.overflow;
+  html.style.overflow = 'hidden';
   window.scrollTo(scrollPosition[0], scrollPosition[1]);
 };
 
-window.unblockScroll = function () {
-  const html = $('html');
-  const scrollPosition = html.data('scroll-position');
-  html.css('overflow', html.data('previous-overflow'));
+window.unblockScroll = () => {
+  const html = document.documentElement;
+  const { scrollPosition } = html.dataset;
+  html.style.overflow = html.dataset.previousOverflow;
   if (scrollPosition) window.scrollTo(scrollPosition[0], scrollPosition[1]);
 };
 // end
@@ -65,46 +75,15 @@ window.unblockScroll = function () {
 // Smooth scroll to ellement
 export function scrollHeader() {
   const scrollTop = !!window.scrollY;
-  scrollTop
-    ? options.header.classList.add('is-scroll')
-    : options.header.classList.remove('is-scroll');
+  if (scrollTop) opts.header.classList.add('is-scroll');
+  else opts.header.classList.remove('is-scroll');
 }
 
 export function setIntersectionObserver(callback, section) {
-  let boxElement;
+  const boxElement = document.querySelector(section);
   let prevRatio = 0.0;
 
-  boxElement = document.querySelector(section);
-
-  createObserver();
-
-  function createObserver() {
-    let observer;
-
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: buildThresholdList(),
-    };
-
-    observer = new IntersectionObserver(handleIntersect, observerOptions);
-    observer.observe(boxElement);
-  }
-
-  function buildThresholdList() {
-    const thresholds = [];
-    const numSteps = 1;
-
-    for (let i = 1.0; i <= numSteps; i++) {
-      const ratio = i / numSteps;
-      thresholds.push(ratio);
-    }
-
-    thresholds.push(0);
-    return thresholds;
-  }
-
-  function handleIntersect(entries, observer) {
+  const handleIntersect = (entries) => {
     entries.forEach((entry) => {
       if (entry.intersectionRatio > prevRatio) {
         setTimeout(() => {
@@ -118,7 +97,31 @@ export function setIntersectionObserver(callback, section) {
 
       prevRatio = entry.intersectionRatio;
     });
+  };
+
+  const buildThresholdList = () => {
+    const thresholds = [];
+    const numSteps = 1;
+
+    for (let i = 1.0; i <= numSteps; i++) {
+      const ratio = i / numSteps;
+      thresholds.push(ratio);
+    }
+
+    thresholds.push(0);
+    return thresholds;
+  };
+  function createObserver() {
+    const observerOpts = {
+      root: null,
+      rootMargin: '0px',
+      threshold: buildThresholdList(),
+    };
+    const observer = new IntersectionObserver(handleIntersect, observerOpts);
+    observer.observe(boxElement);
   }
+
+  createObserver();
 }
 
 // Insert iframe API YT script
@@ -128,156 +131,142 @@ export function embedYoutube() {
   const firstScriptTag = document.getElementsByTagName('script')[0];
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 }
+
 // Set aspect ratio to html video
 export function setAspectRatioVideo() {
-  const $video = $('video, iframe');
-  if ($video.length) {
-    $video.parent().is('p')
-      ? $video.parent().addClass('ratio-16x9')
-      : $video.wrap("<div class='ratio-16x9'></div>");
-  }
+  const media = document.querySelectorAll('video, iframe');
+  media.forEach((item) => {
+    if (item.parentNode.tagName === 'p') {
+      item.parentNode.classList.add('ratio ratio-16x9');
+    } else {
+      const wrap = document.createElement('div');
+      wrap.className = 'ratio ratio-16x9';
+      item.replaceWith(wrap);
+      wrap.append(item);
+    }
+  });
 }
 
-export function accordionMenu(ev) {
-  if (!$(ev.currentTarget).closest('.accordion__tab').hasClass('active')) {
-    $(ev.currentTarget).closest('.accordion__tab').addClass('active').find('.accordion__content')
-      .slideToggle();
-    // $(ev.currentTarget).closest('.accordion__tab').addClass('active').siblings('.accordion__tab.active').removeClass('active')
-    // .find('.accordion__content').slideToggle();
-  } else {
-    $(ev.currentTarget).closest('.accordion__tab').removeClass('active').find('.accordion__content')
-      .slideToggle();
-  }
+// Accordion menu
+export function accordionMenu(cls) {
+  const clickTitles = document.querySelectorAll(cls);
+  let heightContent;
+
+  clickTitles.forEach((clickTitle, idx) => {
+    clickTitle.addEventListener('click', () => {
+      const accordionTab = document.querySelectorAll('.accordion__tab')[idx];
+      const accordionContent = document.querySelectorAll('.accordion__content')[idx];
+
+      if (accordionTab.classList.contains('active')) {
+        accordionContent.style.height = heightContent;
+        accordionTab.classList.remove('active');
+      } else {
+        heightContent = `${accordionContent.offsetHeight}px`;
+        accordionTab.classList.add('active');
+        accordionContent.style.height = '0px';
+      }
+    });
+  });
 }
 
 // Burger sidebar
 export function showMenu(close = false) {
-  if (close || options.header.querySelector('.burger-container').classList.contains('is-animate')) {
-    options.header.classList.remove('is-open');
-    options.header.querySelector('.burger-container').classList.remove('is-animate');
+  if (close || opts.header.querySelector('.burger-container').classList.contains('is-animate')) {
+    opts.header.classList.remove('is-open');
+    opts.header.querySelector('.burger-container').classList.remove('is-animate');
     unblockScroll();
   } else {
-    options.header.classList.add('is-open');
-    options.header.querySelector('.burger-container').classList.add('is-animate');
+    opts.header.classList.add('is-open');
+    opts.header.querySelector('.burger-container').classList.add('is-animate');
     blockScroll();
   }
 }
+
 // Site loader
-export function setProgress(action) {
-  const $counter = $('.preloader-counter');
-  const $bar = $('.preloader-bar');
-  if (action) $counter.text('1');
-  const interval = setInterval(bar, Math.ceil(Math.random() * 100 + 50));
-  function bar() {
-    let progress = parseInt($counter.text());
-    if (!action) {
-      clearInterval(interval);
-      $counter.text('100');
-      $bar.css('background-size', '100%');
-      options.body.addClass('loaded');
-    } else if (progress <= 80) {
-      const random = Math.floor(Math.random() * 10);
-      progress += random;
-      $counter.text(progress);
-      $bar.css('background-size', `${progress}%`);
-    }
-  }
-}
 export function setFullHeight() {
-  const vh = $(window).innerHeight() * 0.01;
-  $('html').attr('style', `--vh: ${vh}px`);
-}
-// Checking input for empty value
-export function fillInput(ev) {
-  makeActive();
-  const el = $(ev.currentTarget);
-  if (el.is("input[type='checkbox']")) {
-    return ev.type === 'change'
-      ? el.closest('.form-group').toggleClass('is-filled')
-      : false;
-  } if (el.is("input[type='radio']")) {
-    return makeActive();
-  }
-  if (el.val() !== '' || ev.type === 'focus') {
-    el.closest('.form-group').addClass('is-filled');
-  } else {
-    el.closest('.form-group').removeClass('is-filled');
-  }
-  function makeActive() {
-    $("input[type='radio']").each(function () {
-      if ($(this).prop('checked')) {
-        $(this).closest('.form-group').addClass('is-filled');
-      } else {
-        $(this).closest('.form-group').removeClass('is-filled');
-      }
-    });
-  }
-}
-// Show pass in input[password] when hold
-export function showPass(ev) {
-  if (isMobile && ev.type === 'click') {
-    $(ev.currentTarget).prev().attr('type') === 'text'
-      ? $(ev.currentTarget).prev().attr('type', 'password')
-      : $(ev.currentTarget).prev().attr('type', 'text');
-  } else if (ev.type === 'mousedown' && !isMobile) {
-    $(ev.currentTarget).prev().prop('type', 'text');
-  } else if ((ev.type === 'mouseup' || ev.type === 'mouseout') && !isMobile) {
-    $(ev.currentTarget).prev().prop('type', 'password');
-  }
-}
-// Smooth scroll to ellement
-export function scrollTo(ev) {
-  showMenu(true);
-  const toEl = $(ev.currentTarget).attr('href');
-  // toEl ? scroll.scrollTo(toEl, -70) : scroll.scrollTo(0);
-  $('html, body').animate({
-    scrollTop: $(toEl).offset().top - options.header.outerHeight(),
-  }, 500, 'linear');
-  return false;
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.setAttribute('style', `--vh: ${vh}px`);
 }
 
-// Universal Selector
-export function selector(ev) {
-  if ($(ev.currentTarget).length) $(ev.currentTarget).toggleClass('is-open');
+// Checking input for empty value
+// export function fillInput(ev) {
+//   makeActive();
+//   const el = $(ev.currentTarget);
+//   if (el.is("input[type='checkbox']")) {
+//     return ev.type === 'change'
+//       ? el.closest('.form-group').toggleClass('is-filled')
+//       : false;
+//   } if (el.is("input[type='radio']")) {
+//     return makeActive();
+//   }
+//   if (el.val() !== '' || ev.type === 'focus') {
+//     el.closest('.form-group').addClass('is-filled');
+//   } else {
+//     el.closest('.form-group').removeClass('is-filled');
+//   }
+//   function makeActive() {
+//     $("input[type='radio']").each(function () {
+//       if ($(this).prop('checked')) {
+//         $(this).closest('.form-group').addClass('is-filled');
+//       } else {
+//         $(this).closest('.form-group').removeClass('is-filled');
+//       }
+//     });
+//   }
+// }
+
+// Smooth scroll to ellement
+// export function scrollTo(ev) {
+//   showMenu(true);
+//   const toEl = $(ev.currentTarget).attr('href');
+//   // toEl ? scroll.scrollTo(toEl, -70) : scroll.scrollTo(0);
+//   $('html, body').animate({
+//     scrollTop: $(toEl).offset().top - opts.header.outerHeight(),
+//   }, 500, 'linear');
+//   return false;
+// }
+
+// Universal Selector toggler
+export function toggler(ev) {
+  if (ev.currentTarget) ev.currentTarget.classList.toggle('is-open');
 }
+
 // Expand text
 export function expander(ev) {
-  const $content = $(ev.currentTarget).prev();
-  const curHeight = $content.height();
-  $content.css('height', 'auto');
-  $content.attr('aria-expanded', true);
-  const autoHeight = $content.height();
+  const content = ev.currentTarget.previousElementSibling;
+  // const curHeight = content.clientHeight;
+  content.style.height = 'auto';
+  content.setAttribute('aria-expanded', true);
+  const autoHeight = content.clientHeight;
   // with scroll height of scrolled element
-  $content
-    .height(curHeight)
-    .animate({ height: autoHeight }, 300);
-  $(ev.currentTarget).remove();
+  content.style.height = autoHeight;
+  ev.currentTarget.remove();
 }
 
 // Tabs
-export function openTab(ev) {
-  ev.preventDefault();
-  const id = $(ev.currentTarget).data('target');
-  const pos = $(this).position();
-  if ($(this).parent().find('.tab-slider').length) {
-    $(this).parent().find('.tab-slider')
-      .stop()
-      .css({
-        left: pos.left,
-        width: $(this).outerWidth(),
-      });
-  }
-  $('.tab__content').each((i, el) => {
-    $(el).attr('visibility', 'hidden');
-    $(el).removeClass('active');
-  });
-  $('.tab__link').each((i, el) => {
-    $(el).removeClass('active');
-  });
-  $(id).attr('visibility', '');
-  $(id).addClass('active');
-  $(ev.currentTarget).addClass('active');
-}
+// export function openTab(ev) {
+//   ev.preventDefault();
+//   const id = $(ev.currentTarget).data('target');
+//   const pos = $(this).position();
+//   if ($(this).parent().find('.tab-slider').length) {
+//     $(this).parent().find('.tab-slider')
+//       .stop()
+//       .css({
+//         left: pos.left,
+//         width: $(this).outerWidth(),
+//       });
+//   }
+//   $('.tab__content').each((i, el) => {
+//     $(el).attr('visibility', 'hidden');
+//     $(el).removeClass('active');
+//   });
+//   $('.tab__link').each((i, el) => {
+//     $(el).removeClass('active');
+//   });
+//   $(id).attr('visibility', '');
+//   $(id).addClass('active');
+//   $(ev.currentTarget).addClass('active');
+// }
 
 // Modals & popups
 export class Modal {
@@ -287,162 +276,71 @@ export class Modal {
   }
 
   closeOnEsc(ev) {
-    if (ev.keyCode == 27) {
-      options.body.css('overflow', '');
-      $('.show-modal').removeClass('show-modal');
-      $(window).off('keydown', this.closeOnEsc);
+    if (ev.keyCode === 27) {
+      opts.body.style.overflow = '';
+      document.querySelector('.show-modal').classList.remove('show-modal');
+      window.removeEventListener('keydown', this.closeOnEsc);
     }
   }
 
   closeModal(modal) {
-    if ($(modal).length) {
-      options.body.css('overflow', '');
-      $(modal).parent().removeClass('show-modal');
-      $(window).off('keydown', this.closeOnEsc);
+    if (modal) {
+      opts.body.style.overflow = '';
+      modal.parentNode.classList.remove('show-modal');
+      window.removeEventListener('keydown', this.closeOnEsc);
     }
   }
 
   openModal(modal) {
-    if ($(modal).length) {
-      options.body.css('overflow', 'hidden');
-      $(modal).parent().addClass('show-modal');
-      $(window).on('keydown', this.closeOnEsc);
+    if (modal) {
+      opts.body.style.overflow = 'hidden';
+      modal.parentNode.classList.add('show-modal');
+      window.addEventListener('keydown', this.closeOnEsc);
     }
   }
 
   render(el) {
-    const modalClass = $(el).data('modal') || '.modal';
-    const $btnClose = $(modalClass).find('.btn-close');
-    $(el).on('click', () => this.openModal(modalClass));
-    $btnClose.on('click', () => this.closeModal(modalClass));
-    $(modalClass)
-      .parent()
-      .on('click', (ev) => {
-        if (ev.currentTarget === ev.target) this.closeModal(modalClass);
+    const modalEl = document.querySelector(el.dataset.modal || '.modal');
+    const btnClose = modalEl.querySelectorAll('.btn-close');
+    el.addEventListener('click', () => this.openModal(modalEl));
+    btnClose.forEach((elem) => elem.addEventListener('click', () => this.closeModal(modalEl)));
+    modalEl
+      .parentNode
+      .addEventListener('click', (ev) => {
+        if (ev.currentTarget === ev.target) this.closeModal(modalEl);
       });
   }
 
   run() {
-    const $elements = $(this.selector);
-    $elements.each((i, el) => this.render(el));
+    const elements = document.querySelectorAll(this.selector);
+    elements.forEach((el) => this.render(el));
   }
 }
 // Coundown
 export function countdown(cls) {
-  if (!$(cls).length) return;
-  $(cls).each((i, el) => {
-    const end = $(el).data('end');
+  const cd = document.querySelector(cls);
+  if (!cd) return;
+  cls.forEach((el) => {
+    const { end } = el.dataset;
     const timer = setInterval(() => {
       const t = end - Date.now();
       const days = Math.floor(t / (1000 * 60 * 60 * 24));
       const hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((t % (1000 * 60)) / 1000);
-      days
-        ? $(el).text(`${days}d ${hours}h ${minutes}min ${seconds}sec`)
-        : $(el).text(`${hours}h ${minutes}min ${seconds}sec`);
+      // eslint-disable-next-line no-param-reassign
+      el.innerText = days
+        ? `${days}d ${hours}h ${minutes}min ${seconds}sec`
+        : `${hours}h ${minutes}min ${seconds}sec`;
       if (t <= 0) {
         clearInterval(timer);
-        $(el).closest('.card').remove();
+        el.closest('.card').remove();
       }
     }, 1000);
   });
 }
-export class Timer {
-  constructor(element) {
-    this.clock = $(element);
-    this.end = this.clock.data('end');
-    this.initClock(this.clock, this.end);
-  }
 
-  getTimeRemaining(endtime = Date.now() + 604800000) {
-    const t = endtime - Date.now();
-    const seconds = Math.floor((t / 1000) % 60);
-    const minutes = Math.floor((t / 1000 / 60) % 60);
-    const hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-    const days = Math.floor(t / (1000 * 60 * 60 * 24));
-    return {
-      total: t, days, hours, minutes, seconds,
-    };
-  }
-
-  initClock(clock, endtime) {
-    if (!clock.length) return;
-    const daysSpan = clock.find('.days');
-    const hoursSpan = clock.find('.hours');
-    const minutesSpan = clock.find('.minutes');
-    const secondsSpan = clock.find('.seconds');
-
-    const $circ = this.clock.find('.timer-circle path');
-    const radius = Math.round($circ.get(0).getTotalLength());
-    $circ.css('strokeDasharray', `${radius} ${radius}`);
-    $circ.css('strokeDashoffset', radius);
-    const updateClock = () => {
-      const t = this.getTimeRemaining(endtime);
-      if (t.total <= 0) {
-        clearInterval(timeinterval);
-        daysSpan.text('0');
-        hoursSpan.text('0');
-        minutesSpan.text('0');
-        secondsSpan.text('0');
-      } else {
-        daysSpan.text(t.days);
-        hoursSpan.text((`0${t.hours}`).slice(-2));
-        hoursSpan
-          .parent()
-          .prev()
-          .find('path')
-          .css('strokeDashoffset', (radius * t.hours) / 24);
-        minutesSpan.text((`0${t.minutes}`).slice(-2));
-        minutesSpan
-          .parent()
-          .prev()
-          .find('path')
-          .css('strokeDashoffset', (radius * t.minutes) / 60);
-        secondsSpan.text((`0${t.seconds}`).slice(-2));
-        secondsSpan
-          .parent()
-          .prev()
-          .find('path')
-          .css('strokeDashoffset', (radius * t.seconds) / 60);
-      }
-    };
-    updateClock();
-    let timeinterval = setInterval(updateClock, 1000);
-  }
-}
 // global end
-// export function blogFilter(ev) {
-//   let $input = $(ev.currentTarget);
-//   if (parseInt($input.val()) === 0) {
-//     $input
-//       .closest(".form-group")
-//       .siblings()
-//       .removeClass("is-filled")
-//       .find(".form-control")
-//       .prop("checked", false);
-//   } else
-//     $input
-//       .closest(".form-group")
-//       .siblings()
-//       .eq(0)
-//       .removeClass("is-filled")
-//       .find(".form-control")
-//       .prop("checked", false);
-// }
-
-// let cursor;
-// export function customCursor(el, ev) {
-//   cursor = $(el);
-//   const mouseX = ev.clientX,
-//   mouseY = ev.clientY,
-//   posX = cursor.width() / 2,
-//   posY = cursor.height() / 2;
-//   gsap.to(cursor, 0.2, {
-//     x: mouseX - posX,
-//     y: mouseY - posY
-//   })
-// }
 
 // const hover = $("a, button, .border-corner")
 // hover.mouseover(() => {

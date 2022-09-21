@@ -1,12 +1,12 @@
-import { options } from './import/options';
+import opts from './import/options';
 // import "./import/sliders";
 import {
-  embedYoutube,
-  accordionMenu,
+  // embedYoutube,
+  // accordionMenu,
   setFullHeight,
   // fillInput,
   // expander,
-  scrollTo,
+  // scrollTo,
   // scrollHeader,
   // selector,
   // openTab,
@@ -24,9 +24,9 @@ class App {
   constructor() {
     this.addEventListeners();
     this.loadSvgOnPage();
-    embedYoutube();
+    // embedYoutube();
     setFullHeight();
-    this.initPhrase = 'App init';
+    this.initPhrase = opts.initText;
   }
 
   loadSvgOnPage() {
@@ -40,24 +40,25 @@ class App {
   }
 
   addEventListeners() {
-    $(window).on('scroll', () => {
+    window.addEventListener('scroll', () => {
       scrollHeader();
     });
 
-    $(window).on('load', () => {
+    window.addEventListener('load', () => {
       scrollHeader();
       // eslint-disable-next-line
-      console.log('App init\n');
+      console.log(`${this.initPhrase}\n`);
     });
 
-    $(window).on('resize', () => {
+    window.addEventListener('resize', () => {
       setFullHeight();
     });
 
     // Elements events
-    $('.to-top, a[href^=\'#sec\']').on('click', scrollTo);
-    $('#nav-toggle').on('click', () => showMenu());
-    $('.accordion__title').on('click', accordionMenu);
+    // $('.to-top, a[href^=\'#sec\']').on('click', scrollTo);
+    document.querySelector('#nav-toggle')
+      .addEventListener('click', showMenu);
+    // $('.accordion__title').on('click', accordionMenu);
   }
 
   init() {
