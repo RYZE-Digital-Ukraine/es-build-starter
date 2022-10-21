@@ -23,6 +23,7 @@
     "chart": "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"
   },
   "placeholders": {
-    "img": "https://via.placeholder.com"
+    "img": "https://via.placeholder.com",
+    "photo": "https://loremflickr.com"
   }
 }
