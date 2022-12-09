@@ -9,11 +9,11 @@ $base-value: 10px !default;
 @import "tools/transitions";
 
 // Vendor
+@import "base/grid";
 @import "vendor/reboot";
 // @import "vendor/import/selectbox";
 
 // Base
-@import "base/grid";
 @import "base/fonts";
 @import "base/general";
 @import "base/article";
