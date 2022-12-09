@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-plusplus */
 // import { isMobile } from "mobile-device-detect";
+import './vendor/form-validation';
 import opts from './options';
 
 // Global helpers
@@ -72,6 +73,10 @@ window.unblockScroll = () => {
 };
 // end
 
+// Form Validations
+export function formsValidations() {
+  return new FormValidation(opts.validations);
+}
 // Smooth scroll to ellement
 export function scrollHeader() {
   const scrollTop = !!window.scrollY;
@@ -79,49 +84,21 @@ export function scrollHeader() {
   else opts.header.classList.remove('is-scroll');
 }
 
-export function setIntersectionObserver(callback, section) {
-  const boxElement = document.querySelector(section);
-  let prevRatio = 0.0;
+export function setIntersectionObserver(section, callback) {
+  const target = section;
 
-  const handleIntersect = (entries) => {
-    entries.forEach((entry) => {
-      if (entry.intersectionRatio > prevRatio) {
-        setTimeout(() => {
-          callback();
-        }, 1000);
+  function handleIntersection(entries) {
+    entries.map((entry) => {
+      if (entry.isIntersecting) {
+        callback(true, entry);
       } else {
-        setTimeout(() => {
-          callback();
-        }, 1000);
+        callback(false, entry);
       }
-
-      prevRatio = entry.intersectionRatio;
     });
-  };
-
-  const buildThresholdList = () => {
-    const thresholds = [];
-    const numSteps = 1;
-
-    for (let i = 1.0; i <= numSteps; i++) {
-      const ratio = i / numSteps;
-      thresholds.push(ratio);
-    }
-
-    thresholds.push(0);
-    return thresholds;
-  };
-  function createObserver() {
-    const observerOpts = {
-      root: null,
-      rootMargin: '0px',
-      threshold: buildThresholdList(),
-    };
-    const observer = new IntersectionObserver(handleIntersect, observerOpts);
-    observer.observe(boxElement);
   }
 
-  createObserver();
+  const observer = new IntersectionObserver(handleIntersection);
+  observer.observe(target);
 }
 
 // Insert iframe API YT script
@@ -148,24 +125,17 @@ export function setAspectRatioVideo() {
 }
 
 // Accordion menu
-export function accordionMenu(cls) {
-  const clickTitles = document.querySelectorAll(cls);
-  let heightContent;
+export function accordionMenu(el) {
+  el.addEventListener('click', (ev) => {
+    const accordionTab = ev.currentTarget.closest('.accordion__tab');
+    const accordionContent = ev.currentTarget.nextElementSibling;
+    accordionTab.classList.toggle('is-active');
 
-  clickTitles.forEach((clickTitle, idx) => {
-    clickTitle.addEventListener('click', () => {
-      const accordionTab = document.querySelectorAll('.accordion__tab')[idx];
-      const accordionContent = document.querySelectorAll('.accordion__content')[idx];
-
-      if (accordionTab.classList.contains('active')) {
-        accordionContent.style.height = heightContent;
-        accordionTab.classList.remove('active');
-      } else {
-        heightContent = `${accordionContent.offsetHeight}px`;
-        accordionTab.classList.add('active');
-        accordionContent.style.height = '0px';
-      }
-    });
+    if (accordionContent.style.maxHeight) {
+      accordionContent.style.maxHeight = '';
+    } else {
+      accordionContent.style.maxHeight = `${accordionContent.scrollHeight}px`;
+    }
   });
 }
 

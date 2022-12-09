@@ -1,3 +1,6 @@
+// Libs/Plugins
+import lozad from 'lozad';
+// Global options and utils
 import opts from './import/options';
 // import "./import/sliders";
 import {
@@ -5,6 +8,7 @@ import {
   // accordionMenu,
   setFullHeight,
   // fillInput,
+  formsValidations,
   // expander,
   // scrollTo,
   // scrollHeader,
@@ -22,14 +26,19 @@ import {
 
 class App {
   constructor() {
-    this.addEventListeners();
-    this.loadSvgOnPage();
+    // Vars
+    this.initPhrase = opts.initText;
+    this.validation = null;
+    // Funcs
     // embedYoutube();
     setFullHeight();
-    this.initPhrase = opts.initText;
+    // Calls
+    App.loadSvgOnPage();
+    this.addEventListeners();
+    this.setFormsValidations();
   }
 
-  loadSvgOnPage() {
+  static loadSvgOnPage() {
     const sprite = document.getElementById('sprite');
     const path = sprite.dataset.path || '';
     fetch(`${path}/imgs/stack/sprite.svg`)
@@ -39,7 +48,23 @@ class App {
       });
   }
 
+  static lazyLoadInit(cls = '[data-src]') {
+    const observer = lozad(cls, opts.lozad);
+    observer.observe();
+  }
+
+  setFormsValidations() {
+    this.validation = formsValidations();
+  }
+
   addEventListeners() {
+    // eslint-disable-next-line no-underscore-dangle
+    this._initScriptsEvent = new Event('scriptsInit');
+
+    document.addEventListener('scriptsInit', () => {
+      console.info(`Init scripts\n`);
+    });
+
     window.addEventListener('scroll', () => {
       scrollHeader();
     });
@@ -57,7 +82,7 @@ class App {
     // Elements events
     // $('.to-top, a[href^=\'#sec\']').on('click', scrollTo);
     document.querySelector('#nav-toggle')
-      .addEventListener('click', showMenu);
+      .addEventListener('click', () => showMenu());
     // $('.accordion__title').on('click', accordionMenu);
   }
 
@@ -67,6 +92,9 @@ class App {
       // eslint-disable-next-line
       console.info('Debug is ON');
     }
+    App.lazyLoadInit();
+    // eslint-disable-next-line no-underscore-dangle
+    document.dispatchEvent(this._initScriptsEvent);
   }
 }
 
