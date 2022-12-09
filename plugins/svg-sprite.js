@@ -1,7 +1,7 @@
-import { paths } from '../esbuild.options.js';
 import fs from 'fs';
 import path from 'path';
 import SVGSpriter from 'svg-sprite';
+import { paths } from '../esbuild.options.js';
 
 const config = {
   dest: paths.getImgs().dist,
@@ -21,7 +21,7 @@ const svgSpritePlugin = {
       let spriter = new SVGSpriter(config);
 
       files.forEach(file => {
-        if (path.extname(file) == '.svg')
+        if (path.extname(file) == '.svg' && /^(icon-)/i.test(path.basename(file)))
           svgArr.push(file);
       });
 
@@ -30,14 +30,13 @@ const svgSpritePlugin = {
       };
 
       // Compile the sprite
-      spriter.compile(function (error, result) {
+      spriter.compile((error, result) => {
         /* Write `result` files to disk (or do whatever with them ...) */
         for (const type in result.stack) {
           // Recursively create directories as needed
           fs.mkdirSync(path.dirname(result.stack[type].path), { recursive: true });
           // Write the generated resource to disk
           fs.writeFileSync(result.stack[type].path, result.stack[type].contents);
-
         }
       });
       console.log('\x1b[32m', '⚡ SVG sprite is created! ⚡', '\x1b[0m');

@@ -7,11 +7,10 @@ const copyStaticFilesOptions = {
   src: paths.src,
   dest: paths.dist,
   filter(staticPath) {
-    const exts = ['.ttf'];
-    const folders = ['src', 'fonts'];
+    const exts = ['.ttf', '.otf', '.mp4', '.avi', '.svg'];
+    const folders = ['src', 'fonts', 'imgs'];
     if (devMode) {
       exts.push(...['.jpg', '.jpeg', '.png']);
-      folders.push('imgs');
     }
     let curDir = staticPath.split(path.sep);
 

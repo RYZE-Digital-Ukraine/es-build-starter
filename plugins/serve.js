@@ -1,6 +1,6 @@
-import { devMode, URL, paths } from '../esbuild.options.js';
 import esbuild from 'esbuild';
 import browserSync from 'browser-sync';
+import { devMode, URL, paths } from '../esbuild.options.js';
 
 const config = {
   server: paths.dist,
