@@ -1,8 +1,18 @@
 @import "~bootstrap/scss/root";
 @import "~bootstrap/scss/reboot";
 
-html {
+:root {
   font-size: $base-value;
+
+  @if $enable-vwfs == true {
+    @each $breakpoint, $width in $grid-breakpoints {
+      @if $width != 0 {
+        @include media-breakpoint-up($breakpoint) {
+          font-size: get-vw($vw-viewport: $width);
+        }
+      }
+    }
+  }
 }
 // body {
 //   letter-spacing: 1.4px;

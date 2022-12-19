@@ -17,3 +17,11 @@
   } // Turn 0rem into 0
   @return $value;
 }
+
+@function get-vw($font: $base-value, $vw-viewport) {
+  $vw-context: strip-unit($vw-viewport) * 0.01 * 1px;
+  @if ($vw-context == 0px) {
+    @return $font;
+  }
+  @return divide($font, $vw-context) * 1vw;
+}

@@ -1,2 +1,7 @@
-$base-font: sans-serif;
-$secondary-font: serif;
+@font-face {
+  font-family: "News Cycle";
+  src: url("../fonts/NewsCycle.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
