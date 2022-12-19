@@ -65,6 +65,15 @@ class App {
       console.info(`Init scripts\n`);
     });
 
+    document.addEventListener('dblclick', (ev) => {
+      const now = new Date().getTime();
+      let lastTouchEnd = 0;
+      if (now - lastTouchEnd <= 300) {
+        ev.preventDefault();
+      }
+      lastTouchEnd = now;
+    }, false);
+
     window.addEventListener('scroll', () => {
       scrollHeader();
     });
