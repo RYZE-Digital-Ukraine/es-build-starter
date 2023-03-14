@@ -4,6 +4,7 @@ $base-value: 10px !default;
 // Tools
 @import "tools/functions";
 @import "tools/variables";
+@import "tools/maps";
 @import "tools/mixins";
 @import "tools/helpers";
 @import "tools/transitions";
@@ -28,6 +29,7 @@ $base-value: 10px !default;
 
 .debug {
   border: $border-width solid $red;
+
   & > * {
     border: $border-width solid $red;
   }

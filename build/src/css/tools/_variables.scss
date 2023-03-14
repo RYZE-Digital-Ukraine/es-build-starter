@@ -39,6 +39,7 @@ $enable-important-utilities:  false !default;
 // Prefix for :root CSS variables
 
 $variable-prefix: rd- !default;
+$prefix: $variable-prefix !default;
 
 // Spacing
 $spacer: 1rem !default;
