@@ -3,7 +3,7 @@ import browserSync from 'browser-sync';
 import { devMode, URL, paths } from '../esbuild.options.js';
 
 const config = {
-  server: paths.dist,
+  server: URL ? null : paths.dist,
   port: 8000,
   proxy: URL
 }

@@ -22,9 +22,8 @@ const stylelintPlugin = (config) => ({
         const contents = isNodeModule ? null : await stylelint.lint(config);
 
         const hasLintIssues = contents ? contents.errored : contents;
-
         if (hasLintIssues) {
-          console.log(formatter.verbose(contents.results));
+          console.log(formatter.string(contents.results));
         }
       }
       return null;
