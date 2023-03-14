@@ -2,5 +2,12 @@
   "extends": "stylelint-config-standard-scss",
   "rules": {
     "color-no-invalid-hex": true
-  }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.scss"],
+      "customSyntax": "postcss-scss"
+    }
+  ]
 }
+

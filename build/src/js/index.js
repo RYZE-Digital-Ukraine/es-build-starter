@@ -62,7 +62,7 @@ class App {
     this._initScriptsEvent = new Event('scriptsInit');
 
     document.addEventListener('scriptsInit', () => {
-      console.info(`Init scripts\n`);
+      console.info('Init scripts\n');
     });
 
     document.addEventListener('dblclick', (ev) => {

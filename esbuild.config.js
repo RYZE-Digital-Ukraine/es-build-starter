@@ -10,16 +10,16 @@ import svgSpritePlugin from './plugins/svg-sprite.js';
 import clearDirPlugin from './plugins/clear-dir.js';
 import imgMinPlugin from './plugins/image-min.js';
 import cssPlugin from './plugins/sass-compile.js';
-// import csslintPlugin from './plugins/style-lint.js';
-// import eslintPlugin from './plugins/es-lint.js';
+import csslintPlugin from './plugins/style-lint.js';
+import eslintPlugin from './plugins/es-lint.js';
 import babelPlugin from './plugins/babel.js';
 
 const devPlugins = [
   clearDirPlugin,
   compileViewsPlugin,
   svgSpritePlugin,
-  // csslintPlugin,
-  // eslintPlugin,
+  csslintPlugin,
+  eslintPlugin,
   cssPlugin,
   copyStaticFilesPlugin,
 ];
@@ -37,7 +37,7 @@ const prodPlugins = [
 const config = {
   logLevel: 'debug',
   define: {
-    DEBUG: devMode,
+    DEBUG: devMode.toString(),
     window: 'globalThis'
   },
   color: true,

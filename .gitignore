@@ -26,6 +26,7 @@
 .env.production.local
 .idea/
 .vscode/
+.stylelintcache
 
 npm-debug.log*
 /nbproject/private/
